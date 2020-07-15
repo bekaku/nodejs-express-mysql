@@ -1,4 +1,4 @@
-const dbConfig = require("../plugins/mysql.config");
+const dbConfig = require("../plugins/db.config");
 const Sequelize = require("sequelize");
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
