@@ -1,9 +1,9 @@
 module.exports = {
-  HOST: "http://demo.appedr.com",
+  HOST: "demo.appedr.com",
   USER: "root",
   PASSWORD: "@Dev@ats[]^9yl",
   PORT: 13537,
-  DB: "grand_center",
+  DB: "node_express_mysql",
   dialect: "mysql",
   pool: {
     max: 5,

@@ -6,9 +6,11 @@ const http = require("http"),
   session = require("express-session"),
   cors = require("cors"),
   passport = require("passport"),
+  i18n = require("i18n"),
   errorhandler = require("errorhandler");
 
 const { port } = require("./plugins/config");
+
 const isProduction = process.env.NODE_ENV === "production";
 
 // Create global app object
@@ -20,10 +22,8 @@ app.use(cors());
 app.use(require("morgan")("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
 app.use(require("method-override")());
 app.use(express.static(__dirname + "/public"));
-
 app.use(
   session({
     secret: "conduit",
@@ -44,11 +44,29 @@ if (!isProduction) {
 //   mongoose.set("debug", true);
 // }
 
+//i18n locales
+i18n.configure({
+  locales: ["th", "en"],
+  directory: __dirname + "/locales",
+  defaultLocale: "th",
+  directoryPermissions: "755",
+  api: {
+    __: "t", //now req.__ becomes req.t
+    __n: "tn", //and req.__n can be called as req.tn
+  },
+});
+// default: using 'accept-language' header to guess language settings
+app.use(i18n.init);
+
+//This creates the table if it doesn't exist (and does nothing if it already exists)
+// const db = require("./models");
+// db.sequelize.sync();
+
 app.use(require("./routes"));
 
 /// catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  var err = new Error("Not Found");
+  const err = new Error("Not Found");
   err.status = 404;
   next(err);
 });
@@ -85,6 +103,7 @@ app.use(function (err, req, res, next) {
 });
 
 // finally, let's start our server...
-var server = app.listen(port, function () {
-  console.log("Listening on port " + server.address().port);
+const server = app.listen(port, () => {
+  // console.log("Listening on port " + server.address().port);
+  console.log(`Server is running on http://localhost:${port}/api/`);
 });
