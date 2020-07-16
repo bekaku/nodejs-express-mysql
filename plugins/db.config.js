@@ -7,12 +7,6 @@ module.exports = {
   PORT: process.env.DB_PORT,
   DB: process.env.DB_DB,
   dialect: process.env.DB_DIALECT,
-  // HOST: "demo.appedr.com",
-  // USER: "root",
-  // PASSWORD: "@Dev@ats[]^9yl",
-  // PORT: 13537,
-  // DB: "node_express_mysql",
-  // dialect: "mysql",
   pool: {
     max: 5,
     min: 0,
