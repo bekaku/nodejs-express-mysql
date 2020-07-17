@@ -1,7 +1,14 @@
 const router = require("express").Router();
+const auth = require("../../middleware/auth");
+const permit = require("../../middleware/permit");
 
-router.use("/", require("./MainController"));
-router.use("/role", require("./RoleController"));
+const Main = require("../../controllers/MainController");
+const Role = require("../../controllers/RoleController");
+
+// router.use("/", require("./MainController"));
+router.get("/", Main.index);
+// router.use("/role", require("./RoleController"));
+router.get("/role", auth.optional, permit("role_list"), Role.index);
 
 router.use((err, req, res, next) => {
   console.log(err);
