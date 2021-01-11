@@ -10,4 +10,5 @@ i18n.configure({
     __n: "tn", //and req.__n can be called as req.tn
   },
 });
+// default: using 'accept-language' header to guess language settings
 module.exports = i18n;

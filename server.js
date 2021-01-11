@@ -6,10 +6,10 @@ const http = require("http"),
   session = require("express-session"),
   cors = require("cors"),
   passport = require("passport"),
-  i18n = require("i18n"),
+  // i18n = require("i18n"),
   errorhandler = require("errorhandler");
 
-const { port } = require("./plugins/config");
+const { port } = require("./constant/config");
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -44,18 +44,7 @@ if (!isProduction) {
 //   mongoose.set("debug", true);
 // }
 
-//i18n locales
-i18n.configure({
-  locales: ["th", "en"],
-  directory: __dirname + "/locales",
-  defaultLocale: "th",
-  directoryPermissions: "755",
-  api: {
-    __: "t", //now req.__ becomes req.t
-    __n: "tn", //and req.__n can be called as req.tn
-  },
-});
-// default: using 'accept-language' header to guess language settings
+const i18n = require("./plugins/i18n");
 app.use(i18n.init);
 
 //This creates the table if it doesn't exist (and does nothing if it already exists)

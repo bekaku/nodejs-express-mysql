@@ -3,10 +3,12 @@ const auth = require("../../middleware/auth");
 const permit = require("../../middleware/permit");
 
 const Main = require("../../controllers/MainController");
+const Test = require("../../controllers/TestController");
 const Role = require("../../controllers/RoleController");
 
 // router.use("/", require("./MainController"));
 router.get("/", Main.index);
+router.get("/test", Test.index);
 // router.use("/role", require("./RoleController"));
 router.get("/role", auth.optional, permit("role_list"), Role.index);
 

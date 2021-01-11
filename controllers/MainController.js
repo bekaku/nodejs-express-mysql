@@ -1,3 +1,6 @@
 exports.index = (req, res) => {
-    return res.json({ msg: res.t('welcome', 'chanavee', 'bekaku')});
-  };
+  return res.json({
+    message: res.t("welcome", "chanavee", "bekaku"),
+    dir: __dirname,
+  });
+};
